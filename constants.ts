@@ -22,7 +22,7 @@ export const EXPERIENCE_DATA: Experience[] = [
     company: "PT Amerta Indah Otsuka",
     location: "Sukabumi",
     role: "Web Developer - Internship",
-    period: "Jan 2025 – Oct 2025",
+    period: "Jan 2025 – Present",
     description: [
       "Developed and maintained AI Management app for managing AI knowledge and user access roles.",
       "Developed Sisuka AI, an interactive public chatbot powered by OpenAI + Dify with speech-to-text and auto follow-up features.",

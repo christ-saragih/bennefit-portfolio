@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
           
           <div className="order-2 lg:order-1 animate-fade-in space-y-6">
             <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 text-sm font-medium">
-              Available for Internship / Full-time
+              Available for Full-time
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold leading-tight text-gray-900 dark:text-white">
@@ -62,9 +62,9 @@ const Hero: React.FC = () => {
                 <div className="pl-4 text-gray-600 dark:text-gray-300">gpa: <span className="text-orange-600 dark:text-orange-300">3.79</span>,</div>
                 <div className="pl-4 text-gray-600 dark:text-gray-300">skills: <span className="text-purple-600 dark:text-purple-300">[</span></div>
                 <div className="pl-8 text-green-600 dark:text-green-300">"React", "Next.js", "Angular",</div>
-                <div className="pl-8 text-green-600 dark:text-green-300">"Express", "Prisma", "Laravel"</div>
+                <div className="pl-8 text-green-600 dark:text-green-300">"Express", "Laravel"</div>
                 <div className="pl-4 text-purple-600 dark:text-purple-300">],</div>
-                <div className="pl-4 text-gray-600 dark:text-gray-300">status: <span className="text-green-600 dark:text-green-300">"Ready to Code 🚀"</span></div>
+                <div className="pl-4 text-gray-600 dark:text-gray-300">status: <span className="text-green-600 dark:text-green-300">"Ready to Code 👨🏼‍💻"</span></div>
                 <div className="text-purple-600 dark:text-purple-300">{`}`};</div>
                 
                 <div className="mt-auto pt-4 text-center">

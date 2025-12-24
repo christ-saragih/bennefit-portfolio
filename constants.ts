@@ -5,7 +5,7 @@ import {
   Certification,
   SkillCategory,
 } from "./types";
-import { Linkedin, Github, Mail, MapPin, Download } from "lucide-react";
+import { Linkedin, Github, Mail } from "lucide-react";
 
 export const PERSONAL_INFO = {
   name: "Bennefit Christy Saragih",
@@ -31,7 +31,7 @@ export const SOCIAL_LINKS = [
 export const EXPERIENCE_DATA: Experience[] = [
   {
     company: "PT Amerta Indah Otsuka",
-    logo: "./assets/images/companies/otsuka.svg",
+    logo: "/assets/images/companies/otsuka.svg",
     location: "Sukabumi",
     role: "Fullstack Developer - Internship",
     period: "Jan 2025 – Present",
@@ -53,7 +53,7 @@ export const EXPERIENCE_DATA: Experience[] = [
   },
   {
     company: "PT Sukaharja Quail Indonesia",
-    logo: "./assets/images/companies/sukaquail.svg",
+    logo: "/assets/images/companies/sukaquail.svg",
     location: "Bogor",
     role: "Fullstack Developer - Internship",
     period: "Jul 2024 – Dec 2024",
@@ -67,7 +67,7 @@ export const EXPERIENCE_DATA: Experience[] = [
   },
   {
     company: "Badan Standardisasi Nasional",
-    logo: "./assets/images/companies/bsn.svg",
+    logo: "/assets/images/companies/bsn.svg",
     location: "Jakarta",
     role: "Fullstack Developer - Internship",
     period: "Feb 2024 – Jun 2024",
@@ -107,9 +107,9 @@ export const PROJECTS_DATA: Project[] = [
       "OpenAI",
       "Dify",
     ],
-    thumbnail: "./assets/images/sisuka-ai/1.png",
+    thumbnail: "/assets/images/sisuka-ai/1.png",
     images: [
-      "./assets/images/sisuka-ai/2.png",
+      "/assets/images/sisuka-ai/2.png",
       "https://placehold.co/1200x800/0f172a/60a5fa?text=Admin+Dashboard",
       "https://placehold.co/1200x800/1e293b/60a5fa?text=Analytics+Overview",
     ],
@@ -128,11 +128,11 @@ export const PROJECTS_DATA: Project[] = [
     role: "Fullstack Developer",
     category: "Internship",
     techStack: ["Angular", "Bootstrap", "Express.js", "Prisma"],
-    thumbnail: "./assets/images/ai-management/1.png",
+    thumbnail: "/assets/images/ai-management/1.png",
     images: [
-      "./assets/images/ai-management/2.png",
-      "./assets/images/ai-management/3.png",
-      "./assets/images/ai-management/4.png",
+      "/assets/images/ai-management/2.png",
+      "/assets/images/ai-management/3.png",
+      "/assets/images/ai-management/4.png",
     ],
     description: [
       "Internal application for managing AI knowledge bases and documents.",
@@ -148,11 +148,11 @@ export const PROJECTS_DATA: Project[] = [
     role: "Fullstack Developer",
     category: "Internship",
     techStack: ["Angular", "Bootstrap", "Express.js", "Prisma", "RFID"],
-    thumbnail: "./assets/images/canteen-app/1.png",
+    thumbnail: "/assets/images/canteen-app/1.png",
     images: [
-      "./assets/images/canteen-app/2.png",
-      "./assets/images/canteen-app/3.png",
-      "./assets/images/canteen-app/4.png",
+      "/assets/images/canteen-app/2.png",
+      "/assets/images/canteen-app/3.png",
+      "/assets/images/canteen-app/4.png",
     ],
     description: [
       "Integrated application for managing employee meal planning.",
@@ -169,13 +169,13 @@ export const PROJECTS_DATA: Project[] = [
     role: "Fullstack Developer",
     category: "Internship",
     techStack: ["Angular", "Bootstrap", "Express.js", "Prisma"],
-    thumbnail: "./assets/images/dpia-app/1.png",
+    thumbnail: "/assets/images/dpia-app/1.png",
     images: [
-      "./assets/images/dpia-app/2.png",
-      "./assets/images/dpia-app/3.png",
-      "./assets/images/dpia-app/4.png",
-      "./assets/images/dpia-app/5.png",
-      "./assets/images/dpia-app/6.png",
+      "/assets/images/dpia-app/2.png",
+      "/assets/images/dpia-app/3.png",
+      "/assets/images/dpia-app/4.png",
+      "/assets/images/dpia-app/5.png",
+      "/assets/images/dpia-app/6.png",
     ],
     description: [
       "Centralized system for UU 27/2022 (Personal Data Protection) compliance.",

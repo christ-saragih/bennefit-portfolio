@@ -1,5 +1,6 @@
 export interface Experience {
   company: string;
+  logo: string;
   location: string;
   role: string;
   period: string;

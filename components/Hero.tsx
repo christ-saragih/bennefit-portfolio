@@ -99,7 +99,7 @@ const Hero: React.FC = () => {
                   "React", "Next.js", "Angular",
                 </div>
                 <div className="pl-8 text-green-600 dark:text-green-300">
-                  "Express", "Laravel"
+                  "Express", "Golang", "Laravel"
                 </div>
                 <div className="pl-4 text-purple-600 dark:text-purple-300">
                   ],

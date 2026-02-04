@@ -14,8 +14,9 @@ export const PERSONAL_INFO = {
   linkedin: "linkedin.com/in/bennefit-christy-saragih",
   github: "github.com/christ-saragih",
   location: "Bogor, Indonesia",
+  cvPath: "assets/cv/CV_BennefitChristySaragih.pdf",
   about:
-    "Bachelor of Applied Science in Software Engineering Technology from IPB University with a GPA of 3.79. Experienced in developing scalable web applications using modern stacks like Next.js, React, Angular, and Express with Prisma. Passionate about creating seamless user experiences and robust backend systems.",
+    "Bachelor of Applied Science in Software Engineering Technology from IPB University with a GPA of 3.79. Experienced in developing scalable web applications using modern stacks like Next.js, React, Angular, Express with TypeScript, and Golang. Passionate about creating seamless user experiences and robust backend systems.",
 };
 
 export const SOCIAL_LINKS = [
@@ -34,7 +35,7 @@ export const EXPERIENCE_DATA: Experience[] = [
     logo: "/assets/images/companies/otsuka.svg",
     location: "Sukabumi",
     role: "Fullstack Developer - Internship",
-    period: "Jan 2025 – Present",
+    period: "Jan 2025 – Jan 2026",
     description: [
       "Developed and maintained AI Management app for managing AI knowledge and user access roles.",
       "Developed Sisuka AI, an interactive public chatbot powered by OpenAI + Dify with speech-to-text and auto follow-up features.",
@@ -302,6 +303,7 @@ export const SKILLS_DATA: SkillCategory[] = [
       "Next.js",
       "Angular",
       "TypeScript",
+      "Flutter",
       "Tailwind CSS",
       "Bootstrap",
       "HTML5",
@@ -313,6 +315,7 @@ export const SKILLS_DATA: SkillCategory[] = [
     skills: [
       "Node.js",
       "Express.js",
+      "Golang",
       "Laravel",
       "Sequelize ORM",
       "Prisma ORM",

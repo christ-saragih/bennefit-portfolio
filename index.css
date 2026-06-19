@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  /* Theme-aware surface color. Used as the DEFAULT background for badges/inputs
+     via a CSS variable instead of `dark:bg-night`, so that color overrides
+     (bg-accent, bg-coral, bg-grass, …) still win in dark mode.
+     `dark:bg-night` inside @apply would generate `.dark .neo-tag` which has a
+     higher specificity than a single utility class and would override it. */
+  :root {
+    --surface: theme("colors.paper");
+  }
+  .dark {
+    --surface: theme("colors.night");
+  }
+
   body {
     @apply bg-paper text-ink dark:bg-night dark:text-chalk font-sans transition-colors duration-300 overflow-x-hidden;
   }
@@ -31,7 +43,8 @@
 
   /* Monospace bordered tag/chip */
   .neo-tag {
-    @apply inline-flex items-center border-2 border-ink dark:border-chalk bg-paper dark:bg-night font-mono text-xs font-bold uppercase tracking-wide px-2 py-0.5;
+    @apply inline-flex items-center border-2 border-ink dark:border-chalk font-mono text-xs font-bold uppercase tracking-wide px-2 py-0.5;
+    background-color: var(--surface);
   }
 
   /* Form input */

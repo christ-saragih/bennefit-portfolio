@@ -21,7 +21,7 @@ export default {
         night: "#16140F", // warm near-black — dark background
         chalk: "#F2EAD9", // warm off-white — text & borders (dark)
         accent: "#FF9EC4", // soft rose pink — primary
-        coral: "#FF5E3A", // coral — secondary
+        coral: "#EA4513", // deep coral — secondary (darkened for WCAG contrast)
         azure: "#4DA3FF", // blue — tertiary
         grass: "#9BE564", // green — quaternary
       },

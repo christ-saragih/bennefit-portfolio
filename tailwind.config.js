@@ -11,30 +11,44 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Outfit", "sans-serif"],
+        sans: ["Space Grotesk", "system-ui", "sans-serif"],
+        mono: ["Space Mono", "ui-monospace", "monospace"],
       },
       colors: {
-        glass: {
-          100: "rgba(255, 255, 255, 0.05)",
-          200: "rgba(255, 255, 255, 0.1)",
-          300: "rgba(255, 255, 255, 0.15)",
-          border: "rgba(255, 255, 255, 0.1)",
-        },
+        // Neo-brutalist palette
+        paper: "#FAF4E8", // warm cream — light background
+        ink: "#1A1A18", // near-black — text & borders (light)
+        night: "#16140F", // warm near-black — dark background
+        chalk: "#F2EAD9", // warm off-white — text & borders (dark)
+        accent: "#FF9EC4", // soft rose pink — primary
+        coral: "#FF5E3A", // coral — secondary
+        azure: "#4DA3FF", // blue — tertiary
+        grass: "#9BE564", // green — quaternary
+      },
+      boxShadow: {
+        // Hard, offset, no-blur brutalist shadows (light mode — ink)
+        neo: "4px 4px 0 0 #1A1A18",
+        "neo-sm": "2px 2px 0 0 #1A1A18",
+        "neo-lg": "6px 6px 0 0 #1A1A18",
+        "neo-xl": "8px 8px 0 0 #1A1A18",
+        // Dark mode — chalk
+        "neo-chalk": "4px 4px 0 0 #F2EAD9",
+        "neo-chalk-sm": "2px 2px 0 0 #F2EAD9",
+        "neo-chalk-lg": "6px 6px 0 0 #F2EAD9",
+        "neo-chalk-xl": "8px 8px 0 0 #F2EAD9",
       },
       animation: {
-        blob: "blob 7s infinite",
-        "fade-in": "fadeIn 1s ease-out",
+        "fade-in": "fadeIn 0.8s ease-out both",
+        marquee: "marquee 28s linear infinite",
       },
       keyframes: {
-        blob: {
-          "0%": { transform: "translate(0px, 0px) scale(1)" },
-          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
-          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
-          "100%": { transform: "translate(0px, 0px) scale(1)" },
-        },
         fadeIn: {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },

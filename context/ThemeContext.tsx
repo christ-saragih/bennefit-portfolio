@@ -18,7 +18,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       return 'dark';
     }
-    return 'dark'; // Default to dark if unknown
+    return 'light'; // Default to light — the brutalist look shines on paper
   });
 
   useEffect(() => {

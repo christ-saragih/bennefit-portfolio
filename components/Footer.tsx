@@ -3,27 +3,31 @@ import { SOCIAL_LINKS } from '../constants';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-8 border-t border-gray-200 dark:border-white/10 mt-20 relative bg-gray-50 dark:bg-[#0a0f1e]">
-       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-         <p className="text-gray-500 text-sm">
-           © {new Date().getFullYear()} Bennefit Christy Saragih. All rights reserved.
-         </p>
-         
-         <div className="flex gap-4">
-            {SOCIAL_LINKS.map((link, idx) => {
-              const Icon = link.icon;
-              return (
-                <a 
-                  key={idx} 
-                  href={link.href}
-                  className="text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  <Icon size={18} />
-                </a>
-              )
-            })}
-         </div>
-       </div>
+    <footer className="border-t-2 border-ink dark:border-chalk mt-20 bg-paper dark:bg-night relative z-10">
+      <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="font-mono text-sm text-ink/70 dark:text-chalk/70 text-center md:text-left">
+          © {new Date().getFullYear()} Bennefit Christy Saragih.
+          <span className="hidden sm:inline"> All rights reserved.</span>
+        </p>
+
+        <div className="flex gap-3">
+          {SOCIAL_LINKS.map((link, idx) => {
+            const Icon = link.icon;
+            return (
+              <a
+                key={idx}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={link.label}
+                className="neo bg-paper dark:bg-night p-2.5 transition-transform hover:-translate-y-1"
+              >
+                <Icon size={18} />
+              </a>
+            );
+          })}
+        </div>
+      </div>
     </footer>
   );
 };

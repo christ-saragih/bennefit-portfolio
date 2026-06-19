@@ -6,13 +6,13 @@ interface GlassCardProps {
   hoverEffect?: boolean;
 }
 
+// Neo-brutalist card: solid fill, thick border, hard offset shadow (no glass/blur).
 const GlassCard: React.FC<GlassCardProps> = ({ children, className = "", hoverEffect = true }) => {
   return (
-    <div 
+    <div
       className={`
-        glass-panel rounded-2xl p-6 md:p-8 
-        transition-all duration-300 ease-in-out
-        ${hoverEffect ? 'hover:scale-[1.01] hover:shadow-xl dark:hover:bg-white/5 dark:hover:border-white/20' : ''}
+        neo-card p-6 md:p-8
+        ${hoverEffect ? 'neo-interactive' : ''}
         ${className}
       `}
     >

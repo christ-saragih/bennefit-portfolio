@@ -71,7 +71,7 @@ const Contact: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <ScrollReveal delay={100} className="space-y-6">
-            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+            <p className="text-lg leading-relaxed text-ink/80 dark:text-chalk/80">
               I'm currently available for internship and full-time
               opportunities. If you have any questions or just want to connect,
               feel free to drop me a message!
@@ -79,17 +79,17 @@ const Contact: React.FC = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={200}>
-            <GlassCard className="relative overflow-hidden">
+            <GlassCard hoverEffect={false}>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 ml-1"
+                    className="block text-sm font-mono font-bold uppercase tracking-wide mb-1.5"
                   >
                     Name
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 dark:text-gray-500">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-ink/50 dark:text-chalk/50">
                       <User size={18} />
                     </div>
                     <input
@@ -99,7 +99,7 @@ const Contact: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl py-3 pl-10 pr-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all"
+                      className="neo-input !pl-10"
                       placeholder="John Doe"
                     />
                   </div>
@@ -108,12 +108,12 @@ const Contact: React.FC = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 ml-1"
+                    className="block text-sm font-mono font-bold uppercase tracking-wide mb-1.5"
                   >
                     Email
                   </label>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 dark:text-gray-500">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-ink/50 dark:text-chalk/50">
                       <Mail size={18} />
                     </div>
                     <input
@@ -123,7 +123,7 @@ const Contact: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl py-3 pl-10 pr-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all"
+                      className="neo-input !pl-10"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -132,12 +132,12 @@ const Contact: React.FC = () => {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-400 mb-1 ml-1"
+                    className="block text-sm font-mono font-bold uppercase tracking-wide mb-1.5"
                   >
                     Message
                   </label>
                   <div className="relative">
-                    <div className="absolute top-3 left-3 pointer-events-none text-gray-400 dark:text-gray-500">
+                    <div className="absolute top-3 left-3 pointer-events-none text-ink/50 dark:text-chalk/50">
                       <MessageSquare size={18} />
                     </div>
                     <textarea
@@ -147,7 +147,7 @@ const Contact: React.FC = () => {
                       onChange={handleChange}
                       required
                       rows={4}
-                      className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl py-3 pl-10 pr-4 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all resize-none"
+                      className="neo-input !pl-10 resize-none"
                       placeholder="Your message here..."
                     />
                   </div>
@@ -156,14 +156,11 @@ const Contact: React.FC = () => {
                 <button
                   type="submit"
                   disabled={status === "success"}
-                  className={`
-                              w-full py-3 rounded-xl font-medium flex items-center justify-center gap-2 transition-all
-                              ${
-                                status === "success"
-                                  ? "bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/50"
-                                  : "bg-blue-600 hover:bg-blue-500 text-white shadow-lg hover:shadow-blue-500/25"
-                              }
-                          `}
+                  className={`neo-btn w-full py-3 font-mono uppercase text-sm ${
+                    status === "success"
+                      ? "bg-grass text-ink"
+                      : "bg-accent text-ink"
+                  }`}
                 >
                   {status === "success" ? (
                     <>

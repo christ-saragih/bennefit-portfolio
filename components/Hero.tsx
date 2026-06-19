@@ -1,132 +1,99 @@
 import React from "react";
-import { Download } from "lucide-react";
+import { Download, ArrowDown } from "lucide-react";
 import { PERSONAL_INFO, SOCIAL_LINKS } from "../constants";
-import GlassCard from "./GlassCard";
+import SmartImage from "./SmartImage";
 
 const Hero: React.FC = () => {
   const cvHref = `${import.meta.env.BASE_URL}${PERSONAL_INFO.cvPath}`;
+  const [firstName, ...rest] = PERSONAL_INFO.name.split(" ");
+  const lastName = rest.join(" ");
+
+  const scrollToContact = () =>
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center pt-20 pb-10 px-4"
+      className="min-h-screen flex items-center pt-28 pb-16 px-4"
     >
-      <div className="w-full max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1 animate-fade-in space-y-6">
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 text-sm font-medium">
-              Available for Full-time
-            </div>
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        {/* Text */}
+        <div className="lg:col-span-7 order-2 lg:order-1 space-y-6 animate-fade-in">
+          <h1 className="font-bold leading-[0.95] tracking-tight text-5xl md:text-7xl">
+            Hi, I'm <span className="highlight">{firstName}</span>
+            <br />
+            {lastName}
+          </h1>
 
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight text-gray-900 dark:text-white">
-              Hello, I'm <br />
-              <span className="text-gradient">{PERSONAL_INFO.name}</span>
-            </h1>
+          <p className="text-xl md:text-2xl font-medium flex flex-wrap items-center gap-3">
+            {PERSONAL_INFO.role}
+            <span className="neo-tag bg-paper dark:bg-night py-1 normal-case tracking-normal">
+              📍 {PERSONAL_INFO.location}
+            </span>
+          </p>
 
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light">
-              {PERSONAL_INFO.role} based in {PERSONAL_INFO.location}
-            </p>
+          <p className="text-base md:text-lg leading-relaxed max-w-xl text-ink/80 dark:text-chalk/80">
+            {PERSONAL_INFO.about}
+          </p>
 
-            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed max-w-xl">
-              {PERSONAL_INFO.about}
-            </p>
-
-            <div className="flex flex-wrap gap-4 pt-4">
-              {SOCIAL_LINKS.map((link, idx) => {
-                const Icon = link.icon;
-                return (
-                  <a
-                    key={idx}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-3 rounded-full bg-gray-200 dark:bg-white/5 border border-gray-300 dark:border-white/10 hover:bg-gray-300 dark:hover:bg-white/10 hover:scale-110 transition-all text-gray-700 dark:text-white"
-                    aria-label={link.label}
-                  >
-                    <Icon size={24} />
-                  </a>
-                );
-              })}
-            </div>
+          <div className="flex flex-wrap gap-4 pt-2">
+            <a
+              href={cvHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="neo-btn bg-accent text-ink px-6 py-3 font-mono text-sm uppercase"
+              aria-label="Download CV"
+            >
+              <Download size={18} /> Download CV
+            </a>
+            <button
+              onClick={scrollToContact}
+              className="neo-btn bg-paper dark:bg-night px-6 py-3 font-mono text-sm uppercase"
+            >
+              Get in touch <ArrowDown size={18} />
+            </button>
           </div>
 
-          <div className="order-1 lg:order-2 flex justify-center lg:justify-end animate-fade-in">
-            <GlassCard className="w-full max-w-md relative overflow-hidden group !p-1">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-              {/* Abstract Code Representation Visualization */}
-              <div className="bg-gray-100 dark:bg-black/40 rounded-xl p-6 font-mono text-sm leading-relaxed overflow-hidden h-[300px] md:h-[400px] flex flex-col border border-gray-200 dark:border-white/5">
-                <div className="flex gap-2 mb-4">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-                <div className="text-blue-600 dark:text-blue-300">
-                  const{" "}
-                  <span className="text-yellow-600 dark:text-yellow-300">
-                    developer
-                  </span>{" "}
-                  ={" "}
-                  <span className="text-purple-600 dark:text-purple-300">{`{`}</span>
-                </div>
-                <div className="pl-4 text-gray-600 dark:text-gray-300">
-                  name:{" "}
-                  <span className="text-green-600 dark:text-green-300">
-                    "{PERSONAL_INFO.name}"
-                  </span>
-                  ,
-                </div>
-                <div className="pl-4 text-gray-600 dark:text-gray-300">
-                  role:{" "}
-                  <span className="text-green-600 dark:text-green-300">
-                    "{PERSONAL_INFO.role}"
-                  </span>
-                  ,
-                </div>
-                <div className="pl-4 text-gray-600 dark:text-gray-300">
-                  gpa:{" "}
-                  <span className="text-orange-600 dark:text-orange-300">
-                    3.79
-                  </span>
-                  ,
-                </div>
-                <div className="pl-4 text-gray-600 dark:text-gray-300">
-                  skills:{" "}
-                  <span className="text-purple-600 dark:text-purple-300">
-                    [
-                  </span>
-                </div>
-                <div className="pl-8 text-green-600 dark:text-green-300">
-                  "React", "Next.js", "Angular",
-                </div>
-                <div className="pl-8 text-green-600 dark:text-green-300">
-                  "Express", "Golang", "Laravel"
-                </div>
-                <div className="pl-4 text-purple-600 dark:text-purple-300">
-                  ],
-                </div>
-                <div className="pl-4 text-gray-600 dark:text-gray-300">
-                  status:{" "}
-                  <span className="text-green-600 dark:text-green-300">
-                    "Ready to Code 👨🏼‍💻"
-                  </span>
-                </div>
-                <div className="text-purple-600 dark:text-purple-300">
-                  {`}`};
-                </div>
+          <div className="flex flex-wrap gap-3 pt-2">
+            {SOCIAL_LINKS.map((link, idx) => {
+              const Icon = link.icon;
+              return (
+                <a
+                  key={idx}
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="neo bg-paper dark:bg-night p-3 transition-transform hover:-translate-y-1"
+                  aria-label={link.label}
+                >
+                  <Icon size={22} />
+                </a>
+              );
+            })}
+          </div>
+        </div>
 
-                <div className="mt-auto pt-4 text-center">
-                  <a
-                    href={cvHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 w-full shadow-lg"
-                    aria-label="Preview CV"
-                  >
-                    <Download size={18} /> Download CV
-                  </a>
-                </div>
-              </div>
-            </GlassCard>
+        {/* Photo frame (dummy placeholder) */}
+        <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end animate-fade-in">
+          <div className="relative w-fit">
+            {/* Accent block sitting behind the frame = the "shadow" */}
+            <div className="absolute inset-0 translate-x-3 translate-y-3 bg-accent border-2 border-ink dark:border-chalk"></div>
+
+            {/* The photo */}
+            <div className="relative border-2 border-ink dark:border-chalk bg-paper dark:bg-night overflow-hidden">
+              <SmartImage
+                eager
+                src={PERSONAL_INFO.photo}
+                alt={PERSONAL_INFO.name}
+                wrapperClassName="w-[260px] sm:w-[300px] lg:w-[330px] h-[330px] sm:h-[380px] lg:h-[420px]"
+                className="block w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Rotated sticker */}
+            <div className="absolute -bottom-5 -left-5 rotate-[-6deg] neo bg-coral text-ink px-4 py-2 font-mono text-xs font-bold uppercase">
+              {"<Fullstack Dev />"}
+            </div>
           </div>
         </div>
       </div>

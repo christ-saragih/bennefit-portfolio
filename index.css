@@ -4,16 +4,48 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 dark:bg-[#0f172a] dark:text-[#e2e8f0] transition-colors duration-300 overflow-x-hidden;
+    @apply bg-paper text-ink dark:bg-night dark:text-chalk font-sans transition-colors duration-300 overflow-x-hidden;
   }
 }
 
 @layer components {
-  .glass-panel {
-    @apply bg-white/60 dark:bg-white/[0.03] backdrop-blur-xl border border-white/40 dark:border-white/[0.08] shadow-lg dark:shadow-none;
+  /* Brutalist border + hard shadow */
+  .neo {
+    @apply border-2 border-ink dark:border-chalk shadow-neo dark:shadow-neo-chalk;
   }
 
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400;
+  /* Solid card with hard shadow (no glass, no blur) */
+  .neo-card {
+    @apply bg-paper dark:bg-night border-2 border-ink dark:border-chalk shadow-neo dark:shadow-neo-chalk;
+  }
+
+  /* Interactive lift on hover for clickable cards */
+  .neo-interactive {
+    @apply transition-all duration-150 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-neo-lg dark:hover:shadow-neo-chalk-lg;
+  }
+
+  /* Button: hard shadow that "presses in" on hover */
+  .neo-btn {
+    @apply inline-flex items-center justify-center gap-2 font-bold border-2 border-ink dark:border-chalk shadow-neo dark:shadow-neo-chalk transition-all duration-150 hover:translate-x-1 hover:translate-y-1 hover:shadow-none active:translate-x-1 active:translate-y-1 active:shadow-none;
+  }
+
+  /* Monospace bordered tag/chip */
+  .neo-tag {
+    @apply inline-flex items-center border-2 border-ink dark:border-chalk bg-paper dark:bg-night font-mono text-xs font-bold uppercase tracking-wide px-2 py-0.5;
+  }
+
+  /* Form input */
+  .neo-input {
+    @apply w-full bg-paper dark:bg-night border-2 border-ink dark:border-chalk px-4 py-3 font-medium text-ink dark:text-chalk placeholder-ink/40 dark:placeholder-chalk/40 focus:outline-none focus:shadow-neo dark:focus:shadow-neo-chalk transition-all;
+  }
+
+  /* Highlighter effect for emphasised words */
+  .highlight {
+    @apply bg-accent text-ink px-2 box-decoration-clone;
+  }
+
+  /* Eyebrow / section label */
+  .eyebrow {
+    @apply font-mono text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-coral;
   }
 }

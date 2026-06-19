@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Hero from '../components/Hero';
+import Marquee from '../components/Marquee';
 import Experience from '../components/Experience';
 import Projects from '../components/Projects';
 import Skills from '../components/Skills';
@@ -30,9 +31,8 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <div id="home">
-        <Hero />
-      </div>
+      <Hero />
+      <Marquee />
       <Experience />
       <Projects />
       <Skills />

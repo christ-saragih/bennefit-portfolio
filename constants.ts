@@ -15,6 +15,7 @@ export const PERSONAL_INFO = {
   github: "github.com/christ-saragih",
   location: "Bogor, Indonesia",
   cvPath: "assets/cv/CV_BennefitChristySaragih.pdf",
+  photo: "/assets/images/profile.jpeg", // 4x5
   about:
     "Bachelor of Applied Science in Software Engineering Technology from IPB University with a GPA of 3.79. Experienced in developing scalable web applications using modern stacks like Next.js, React, Angular, Express with TypeScript, and Golang. Passionate about creating seamless user experiences and robust backend systems.",
 };
@@ -111,8 +112,8 @@ export const PROJECTS_DATA: Project[] = [
     thumbnail: "/assets/images/sisuka-ai/1.png",
     images: [
       "/assets/images/sisuka-ai/2.png",
-      "https://placehold.co/1200x800/0f172a/60a5fa?text=Admin+Dashboard",
-      "https://placehold.co/1200x800/1e293b/60a5fa?text=Analytics+Overview",
+      "https://placehold.co/1200x800/1A1A18/FF9EC4?text=Admin+Dashboard",
+      "https://placehold.co/1200x800/2A2722/FF9EC4?text=Analytics+Overview",
     ],
     description: [
       "Interactive public chatbot powered by OpenAI and Dify to answer company-related FAQs.",
@@ -178,6 +179,8 @@ export const PROJECTS_DATA: Project[] = [
       "/assets/images/dpia-app/5.png",
       "/assets/images/dpia-app/6.png",
     ],
+    // TODO: replace with this project's real Google Drive gallery folder link
+    galleryUrl: "https://drive.google.com/drive/folders/REPLACE_WITH_FOLDER_ID",
     description: [
       "Centralized system for UU 27/2022 (Personal Data Protection) compliance.",
       "Streamlines data protection impact assessments replacing manual workflows.",
@@ -200,11 +203,11 @@ export const PROJECTS_DATA: Project[] = [
       "Midtrans",
     ],
     thumbnail:
-      "https://placehold.co/800x500/1e293b/fbbf24?text=Streamy+Movie+App",
+      "https://placehold.co/800x500/2A2722/FF5E3A?text=Streamy+Movie+App",
     images: [
-      "https://placehold.co/1200x800/1e293b/fbbf24?text=Movie+Catalog",
-      "https://placehold.co/1200x800/0f172a/fbbf24?text=Payment+Gateway+Integration",
-      "https://placehold.co/1200x800/1e293b/fbbf24?text=User+Profile",
+      "https://placehold.co/1200x800/2A2722/FF5E3A?text=Movie+Catalog",
+      "https://placehold.co/1200x800/1A1A18/FF5E3A?text=Payment+Gateway+Integration",
+      "https://placehold.co/1200x800/2A2722/FF5E3A?text=User+Profile",
     ],
     description: [
       "Integrated project with Midtrans Snap payment gateway for secure transactions.",
@@ -230,11 +233,11 @@ export const PROJECTS_DATA: Project[] = [
       "JavaScript",
     ],
     thumbnail:
-      "https://placehold.co/800x500/1e293b/22d3ee?text=TalasGo+E-Commerce",
+      "https://placehold.co/800x500/2A2722/4DA3FF?text=TalasGo+E-Commerce",
     images: [
-      "https://placehold.co/1200x800/1e293b/22d3ee?text=Product+Listing",
-      "https://placehold.co/1200x800/0f172a/22d3ee?text=Cart+Management",
-      "https://placehold.co/1200x800/1e293b/22d3ee?text=Admin+Panel",
+      "https://placehold.co/1200x800/2A2722/4DA3FF?text=Product+Listing",
+      "https://placehold.co/1200x800/1A1A18/4DA3FF?text=Cart+Management",
+      "https://placehold.co/1200x800/2A2722/4DA3FF?text=Admin+Panel",
     ],
     description: [
       "Designed software systems including Use Case, ERD, and Class Diagrams.",
@@ -253,11 +256,11 @@ export const PROJECTS_DATA: Project[] = [
     category: "Personal",
     techStack: ["HTML", "CSS", "Bootstrap", "JavaScript"],
     thumbnail:
-      "https://placehold.co/800x500/1e293b/a78bfa?text=Kosanku+Booking",
+      "https://placehold.co/800x500/2A2722/9BE564?text=Kosanku+Booking",
     images: [
-      "https://placehold.co/1200x800/1e293b/a78bfa?text=Room+Listings",
-      "https://placehold.co/1200x800/0f172a/a78bfa?text=Booking+Form",
-      "https://placehold.co/1200x800/1e293b/a78bfa?text=WhatsApp+Redirection",
+      "https://placehold.co/1200x800/2A2722/9BE564?text=Room+Listings",
+      "https://placehold.co/1200x800/1A1A18/9BE564?text=Booking+Form",
+      "https://placehold.co/1200x800/2A2722/9BE564?text=WhatsApp+Redirection",
     ],
     description: [
       "Collaborated in the development of responsive user interfaces.",

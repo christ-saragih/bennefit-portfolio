@@ -1,0 +1,30 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#1A1A18" opacity="0.08" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#FAF4E8" />
+  <rect width="1200" height="630" fill="url(#dots)" />
+
+  <!-- Brutalist frame -->
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#1A1A18" stroke-width="6" />
+
+  <!-- Monogram + label -->
+  <rect x="72" y="70" width="92" height="92" fill="#FF9EC4" stroke="#1A1A18" stroke-width="5" />
+  <text x="118" y="130" font-family="'Space Mono', monospace" font-size="40" font-weight="700" fill="#1A1A18" text-anchor="middle">BCS</text>
+  <text x="184" y="128" font-family="'Space Mono', monospace" font-size="26" font-weight="700" fill="#1A1A18" letter-spacing="2">// PORTFOLIO</text>
+
+  <!-- Name -->
+  <text x="70" y="330" font-family="'Space Grotesk', Arial, sans-serif" font-size="100" font-weight="700" fill="#1A1A18" letter-spacing="-2">BENNEFIT</text>
+  <text x="70" y="436" font-family="'Space Grotesk', Arial, sans-serif" font-size="96" font-weight="700" fill="#1A1A18" letter-spacing="-2">CHRISTY SARAGIH</text>
+
+  <!-- Role highlight -->
+  <rect x="72" y="498" width="592" height="74" fill="#FF9EC4" stroke="#1A1A18" stroke-width="4" />
+  <text x="96" y="547" font-family="'Space Mono', monospace" font-size="34" font-weight="700" fill="#1A1A18">FULLSTACK DEVELOPER</text>
+
+  <!-- Bottom-right meta -->
+  <text x="1128" y="550" font-family="'Space Mono', monospace" font-size="26" font-weight="700" fill="#1A1A18" text-anchor="end" opacity="0.65">Bogor, Indonesia</text>
+</svg>

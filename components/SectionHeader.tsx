@@ -8,12 +8,15 @@ interface SectionHeaderProps {
 const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle }) => {
   return (
     <div className="mb-10 text-center md:text-left">
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">
+      <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight inline-block">
         {title}
-        <span className="text-blue-500 dark:text-blue-400">.</span>
       </h2>
-      {subtitle && <p className="text-gray-600 dark:text-gray-400 max-w-2xl">{subtitle}</p>}
-      <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-4 mx-auto md:mx-0 opacity-70"></div>
+      <div className="h-2 w-24 bg-accent border-2 border-ink dark:border-chalk mt-3 mx-auto md:mx-0"></div>
+      {subtitle && (
+        <p className="mt-4 text-ink/70 dark:text-chalk/70 max-w-2xl mx-auto md:mx-0">
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 };

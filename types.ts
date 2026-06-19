@@ -27,6 +27,7 @@ export interface Project {
   category?: string;
   thumbnail?: string;
   images?: string[];
+  galleryUrl?: string; // Google Drive folder with the full photo gallery
   demoUrl?: string;
   repoUrl?: string;
 }

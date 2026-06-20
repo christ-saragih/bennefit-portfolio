@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClientProvider } from '@tanstack/react-query';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -7,11 +8,13 @@ import AllProjects from './pages/AllProjects';
 import ProjectDetail from './pages/ProjectDetail';
 import NotFound from './pages/NotFound';
 import { ThemeProvider } from './context/ThemeContext';
+import { queryClient } from './lib/queryClient';
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <Router>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <Router>
         <div className="relative min-h-screen font-sans selection:bg-accent selection:text-ink transition-colors duration-300">
 
           {/* Subtle graph-paper dot grid — flat, intentional, no gradient blobs */}
@@ -37,8 +40,9 @@ const App: React.FC = () => {
             <Footer />
           </div>
         </div>
-      </Router>
-    </ThemeProvider>
+        </Router>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

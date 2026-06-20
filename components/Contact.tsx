@@ -1,16 +1,28 @@
 import React, { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import GlassCard from "./GlassCard";
 import SectionHeader from "./SectionHeader";
 import ScrollReveal from "./ScrollReveal";
-import { Send, CheckCircle, Mail, User, MessageSquare } from "lucide-react";
+import { submitContactMessage } from "../lib/queries";
+import { Send, CheckCircle, Mail, User, MessageSquare, AlertTriangle } from "lucide-react";
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [honeypot, setHoneypot] = useState(""); // anti-spam: humans never fill this
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const mutation = useMutation({
+    mutationFn: submitContactMessage,
+    onSuccess: () => {
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus("idle"), 6000);
+    },
+    onError: (err) => {
+      console.error("Contact submit failed", err);
+      setStatus("error");
+    },
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -21,43 +33,24 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus("idle");
 
-    // Basic validation
-    if (
-      !formData.name.trim() ||
-      !formData.email.trim() ||
-      !formData.message.trim()
-    ) {
+    // Bot filled the honeypot → silently pretend success, don't send.
+    if (honeypot) {
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
       return;
     }
 
-    try {
-      const existingSubmissions = JSON.parse(
-        localStorage.getItem("contact_submissions") || "[]"
-      );
-      const newSubmission = {
-        id: Date.now(),
-        ...formData,
-        submittedAt: new Date().toISOString(),
-      };
-
-      localStorage.setItem(
-        "contact_submissions",
-        JSON.stringify([...existingSubmissions, newSubmission])
-      );
-
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-
-      // Reset status after a few seconds
-      setTimeout(() => {
-        setStatus("idle");
-      }, 5000);
-    } catch (error) {
-      console.error("Failed to save submission", error);
-      setStatus("error");
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      return;
     }
+
+    mutation.mutate(formData);
   };
+
+  const isSending = mutation.isPending;
+  const isDone = status === "success";
 
   return (
     <section id="contact" className="py-20 px-4">
@@ -81,6 +74,20 @@ const Contact: React.FC = () => {
           <ScrollReveal delay={200}>
             <GlassCard hoverEffect={false}>
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Honeypot — hidden from users & screen readers, visible to bots */}
+                <div className="absolute left-[-9999px]" aria-hidden="true">
+                  <label htmlFor="company">Company</label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
+
                 <div>
                   <label
                     htmlFor="name"
@@ -153,19 +160,28 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
 
+                {status === "error" && (
+                  <p className="flex items-center gap-2 font-mono text-xs font-bold uppercase text-coral">
+                    <AlertTriangle size={14} /> Couldn't send. Try again or email me directly.
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  disabled={status === "success"}
+                  disabled={isSending || isDone}
                   className={`neo-btn w-full py-3 font-mono uppercase text-sm ${
-                    status === "success"
-                      ? "bg-grass text-ink"
-                      : "bg-accent text-ink"
+                    isDone ? "bg-grass text-ink" : "bg-accent text-ink"
                   }`}
                 >
-                  {status === "success" ? (
+                  {isDone ? (
                     <>
                       <CheckCircle size={20} />
-                      Message Saved!
+                      Message Sent!
+                    </>
+                  ) : isSending ? (
+                    <>
+                      <span className="w-4 h-4 rounded-full border-2 border-ink border-t-transparent animate-spin"></span>
+                      Sending…
                     </>
                   ) : (
                     <>

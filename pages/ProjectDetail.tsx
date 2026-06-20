@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { PROJECTS_DATA } from '../constants';
 import GlassCard from '../components/GlassCard';
 import Lightbox from '../components/Lightbox';
 import SmartImage from '../components/SmartImage';
+import { Loader, ErrorState } from '../components/States';
+import { useProject } from '../hooks/usePortfolio';
 import { ArrowLeft, Calendar, MapPin, Layers, Briefcase, CheckCircle, Image as ImageIcon, ZoomIn, ExternalLink, Github, Globe, ArrowUpRight } from 'lucide-react';
 
 const MAX_GALLERY = 6;
@@ -13,12 +14,32 @@ const categoryColor = (category?: string) =>
 
 const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const project = PROJECTS_DATA.find(p => p.id === id);
+  const { data: project, isLoading, isError } = useProject(id ?? '');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <section className="pt-32 pb-20 px-4 min-h-screen">
+        <div className="max-w-5xl mx-auto">
+          <Loader label="Loading project" />
+        </div>
+      </section>
+    );
+  }
+
+  if (isError) {
+    return (
+      <section className="pt-32 pb-20 px-4 min-h-screen">
+        <div className="max-w-5xl mx-auto">
+          <ErrorState message="Couldn't load this project." />
+        </div>
+      </section>
+    );
+  }
 
   if (!project) {
     return (

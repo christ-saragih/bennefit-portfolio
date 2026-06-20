@@ -1,11 +1,16 @@
 import React from 'react';
-import { SKILLS_DATA, CERTIFICATIONS_DATA, EDUCATION_DATA } from '../constants';
 import GlassCard from './GlassCard';
 import SectionHeader from './SectionHeader';
 import ScrollReveal from './ScrollReveal';
+import { Loader, ErrorState } from './States';
+import { useSkills, useEducation, useCertifications } from '../hooks/usePortfolio';
 import { Award, GraduationCap } from 'lucide-react';
 
 const Skills: React.FC = () => {
+  const { data: skills, isLoading: skillsLoading, isError: skillsError } = useSkills();
+  const { data: education, isLoading: eduLoading, isError: eduError } = useEducation();
+  const { data: certifications, isLoading: certLoading, isError: certError } = useCertifications();
+
   return (
     <section id="skills" className="py-20 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -16,8 +21,11 @@ const Skills: React.FC = () => {
             <SectionHeader title="Technical Skills" />
           </ScrollReveal>
 
+          {skillsLoading && <Loader label="Loading skills" />}
+          {skillsError && <ErrorState />}
+
           <div className="space-y-6">
-            {SKILLS_DATA.map((category, index) => (
+            {skills?.map((category, index) => (
               <ScrollReveal key={index} delay={index * 100}>
                 <GlassCard className="!p-6" hoverEffect={false}>
                   <h3 className="text-lg font-bold uppercase tracking-wide mb-4 pb-2 border-b-2 border-ink dark:border-chalk">
@@ -47,7 +55,9 @@ const Skills: React.FC = () => {
                 Education
               </h3>
             </ScrollReveal>
-            {EDUCATION_DATA.map((edu, index) => (
+            {eduLoading && <Loader label="Loading education" />}
+            {eduError && <ErrorState />}
+            {education?.map((edu, index) => (
               <ScrollReveal key={index} delay={300}>
                 <GlassCard className="mb-4" hoverEffect={false}>
                   <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3">
@@ -58,7 +68,9 @@ const Skills: React.FC = () => {
                     </div>
                     <div className="flex flex-row md:flex-col md:items-end gap-2 shrink-0">
                       <span className="font-mono text-sm">{edu.period}</span>
-                      <span className="neo-tag bg-grass !text-ink normal-case">GPA {edu.gpa}</span>
+                      {edu.gpa && (
+                        <span className="neo-tag bg-grass !text-ink normal-case">GPA {edu.gpa}</span>
+                      )}
                     </div>
                   </div>
                 </GlassCard>
@@ -73,8 +85,11 @@ const Skills: React.FC = () => {
             <SectionHeader title="Certifications" subtitle="Continuous learning and professional development." />
           </ScrollReveal>
 
+          {certLoading && <Loader label="Loading certifications" />}
+          {certError && <ErrorState />}
+
           <div className="space-y-4">
-            {CERTIFICATIONS_DATA.map((cert, index) => (
+            {certifications?.map((cert, index) => (
               <ScrollReveal key={index} delay={index * 100 + 200}>
                 <GlassCard className="!p-5 flex gap-4 items-start" hoverEffect={false}>
                   <span className="neo bg-accent text-ink p-2 shrink-0">

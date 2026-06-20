@@ -1,9 +1,10 @@
 import React from 'react';
-import { PROJECTS_DATA } from '../constants';
 import GlassCard from './GlassCard';
 import SectionHeader from './SectionHeader';
 import ScrollReveal from './ScrollReveal';
 import SmartImage from './SmartImage';
+import { Loader, ErrorState } from './States';
+import { useProjects } from '../hooks/usePortfolio';
 import { FolderGit2, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -11,8 +12,11 @@ const categoryColor = (category?: string) =>
   category === 'Internship' ? 'bg-coral' : 'bg-grass';
 
 const Projects: React.FC = () => {
-  // Show only first 3 projects on the home page
-  const featuredProjects = PROJECTS_DATA.slice(0, 3);
+  const { data: projects, isLoading, isError } = useProjects();
+  const all = projects ?? [];
+  const featured = all.filter((p) => p.isFeatured);
+  // Featured projects on the home page; fall back to the first few if none flagged.
+  const list = (featured.length ? featured : all).slice(0, 3);
 
   return (
     <section id="projects" className="py-20 px-4">
@@ -21,8 +25,11 @@ const Projects: React.FC = () => {
           <SectionHeader title="Projects" subtitle="A glimpse into applications I've built." />
         </ScrollReveal>
 
+        {isLoading && <Loader label="Loading projects" />}
+        {isError && <ErrorState />}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {featuredProjects.map((project, index) => (
+          {list.map((project, index) => (
             <ScrollReveal key={project.id} delay={index * 100} className="h-full">
               <Link to={`/projects/${project.id}`} className="block h-full">
                 <GlassCard className="flex flex-col h-full group cursor-pointer !p-0 overflow-hidden">
@@ -88,14 +95,16 @@ const Projects: React.FC = () => {
           ))}
         </div>
 
-        <ScrollReveal className="flex justify-center" delay={200}>
-          <Link to="/projects">
-            <button className="neo-btn bg-accent text-ink px-8 py-3 font-mono text-sm uppercase group">
-              View All
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </Link>
-        </ScrollReveal>
+        {list.length > 0 && (
+          <ScrollReveal className="flex justify-center" delay={200}>
+            <Link to="/projects">
+              <button className="neo-btn bg-accent text-ink px-8 py-3 font-mono text-sm uppercase group">
+                View All
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );

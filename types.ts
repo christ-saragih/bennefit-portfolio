@@ -30,6 +30,7 @@ export interface Project {
   galleryUrl?: string; // Google Drive folder with the full photo gallery
   demoUrl?: string;
   repoUrl?: string;
+  isFeatured?: boolean; // shown in the homepage "Projects" section
 }
 
 export interface Certification {
@@ -41,4 +42,21 @@ export interface Certification {
 export interface SkillCategory {
   title: string;
   skills: string[];
+}
+
+export interface Profile {
+  name: string;
+  role: string;
+  about: string;
+  email: string;
+  location: string;
+  photoUrl: string | null;
+  cvUrl: string | null;
+  availableForWork: boolean;
+}
+
+export interface SocialLink {
+  platform: string;
+  url: string;
+  label: string;
 }

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { PROJECTS_DATA } from '../constants';
 import GlassCard from '../components/GlassCard';
 import SmartImage from '../components/SmartImage';
+import { Loader, ErrorState } from '../components/States';
+import { useProjects } from '../hooks/usePortfolio';
 import { FolderGit2, ArrowUpRight, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ const categoryColor = (category?: string) =>
   category === 'Internship' ? 'bg-coral' : 'bg-grass';
 
 const AllProjects: React.FC = () => {
+  const { data: projects, isLoading, isError } = useProjects();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,8 +34,14 @@ const AllProjects: React.FC = () => {
           </p>
         </div>
 
+        {isLoading && <Loader label="Loading projects" />}
+        {isError && <ErrorState />}
+        {!isLoading && !isError && projects?.length === 0 && (
+          <p className="font-mono text-ink/60 dark:text-chalk/60">No projects yet.</p>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROJECTS_DATA.map((project) => (
+          {(projects ?? []).map((project) => (
             <Link to={`/projects/${project.id}`} key={project.id} className="block h-full">
               <GlassCard className="flex flex-col h-full group cursor-pointer !p-0 overflow-hidden">
 

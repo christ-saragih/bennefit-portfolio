@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import type { ProjectImage } from "../types";
 
 interface LightboxProps {
-  images: string[];
+  images: ProjectImage[];
   startIndex?: number;
   alt?: string;
   onClose: () => void;
@@ -17,6 +18,7 @@ const Lightbox: React.FC<LightboxProps> = ({
 }) => {
   const [current, setCurrent] = useState(startIndex);
   const hasMultiple = images.length > 1;
+  const image = images[current];
 
   const next = useCallback(
     () => setCurrent((c) => (c + 1) % images.length),
@@ -44,6 +46,8 @@ const Lightbox: React.FC<LightboxProps> = ({
 
   return (
     <div
+      // Scrim stays dark in both themes — it exists to isolate the image, not to
+      // follow the page. Only the card inside it is theme-aware.
       className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/85 backdrop-blur-sm p-4 sm:p-8 animate-fade-in"
       onClick={onClose}
       role="dialog"
@@ -82,14 +86,19 @@ const Lightbox: React.FC<LightboxProps> = ({
 
       {/* Image */}
       <div
-        className="relative max-w-5xl max-h-[85vh]"
+        className="relative flex flex-col max-w-5xl max-h-[85vh]"
         onClick={(e) => e.stopPropagation()}
       >
         <img
-          src={images[current]}
-          alt={`${alt} ${current + 1}`}
-          className="block max-w-full max-h-[85vh] object-contain border-2 border-chalk shadow-neo-chalk bg-night"
+          src={image.url}
+          alt={image.alt ?? `${alt} ${current + 1}`}
+          className="block max-w-full min-h-0 flex-1 object-contain border-2 border-ink dark:border-chalk shadow-neo dark:shadow-neo-chalk bg-paper dark:bg-night"
         />
+        {image.caption && (
+          <p className="shrink-0 max-w-full border-2 border-t-0 border-ink dark:border-chalk bg-paper dark:bg-night px-4 py-3 font-mono text-xs sm:text-sm leading-relaxed text-ink/80 dark:text-chalk/80">
+            {image.caption}
+          </p>
+        )}
       </div>
 
       {/* Next */}

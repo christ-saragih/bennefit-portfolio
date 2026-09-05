@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GlassCard from './GlassCard';
 import SectionHeader from './SectionHeader';
 import ScrollReveal from './ScrollReveal';
+import Lightbox from './Lightbox';
 import { Loader, ErrorState } from './States';
 import { useSkills, useEducation, useCertifications } from '../hooks/usePortfolio';
-import { Award, GraduationCap } from 'lucide-react';
+import { Award, GraduationCap, BadgeCheck, FileText, Eye } from 'lucide-react';
+import type { ProjectImage } from '../types';
 
 const Skills: React.FC = () => {
   const { data: skills, isLoading: skillsLoading, isError: skillsError } = useSkills();
   const { data: education, isLoading: eduLoading, isError: eduError } = useEducation();
   const { data: certifications, isLoading: certLoading, isError: certError } = useCertifications();
+  // Certificate images open in the same lightbox the project gallery uses.
+  const [certImage, setCertImage] = useState<ProjectImage | null>(null);
 
   return (
     <section id="skills" className="py-20 px-4">
@@ -89,24 +93,100 @@ const Skills: React.FC = () => {
           {certError && <ErrorState />}
 
           <div className="space-y-4">
-            {certifications?.map((cert, index) => (
+            {certifications?.map((cert, index) => {
+              const hasProof = !!(cert.credentialUrl || cert.imageUrl || cert.fileUrl);
+              return (
               <ScrollReveal key={index} delay={index * 100 + 200}>
-                <GlassCard className="!p-5 flex gap-4 items-start" hoverEffect={false}>
+                <GlassCard
+                  // Only cards that actually lead somewhere lift on hover.
+                  className={`!p-5 flex gap-4 items-start ${hasProof ? 'relative group overflow-hidden' : ''}`}
+                  hoverEffect={hasProof}
+                >
                   <span className="neo bg-accent text-ink p-2 shrink-0">
                     <Award size={20} />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <h4 className="font-bold leading-tight mb-1">{cert.name}</h4>
                     <p className="text-sm text-ink/75 dark:text-chalk/75 mb-1">{cert.issuer}</p>
                     <p className="text-xs text-ink/60 dark:text-chalk/60 font-mono">{cert.period}</p>
+                    {cert.credentialId && (
+                      <p className="text-xs text-ink/50 dark:text-chalk/50 font-mono mt-1 break-all">
+                        ID: {cert.credentialId}
+                      </p>
+                    )}
+
+                    {/* Proof of the claim — issuer verification first, hosted file second.
+                        From `md` up this becomes a hover overlay like the project gallery.
+                        Below `md` there is no hover, so it stays inline and visible —
+                        otherwise the actions would be unreachable on a phone. */}
+                    {hasProof && (
+                      <div
+                        className="mt-3 flex flex-wrap gap-2
+                                   md:mt-0 md:absolute md:inset-0 md:items-center md:justify-center md:gap-3
+                                   md:bg-ink/0 md:opacity-0 md:pointer-events-none md:transition-all md:duration-200
+                                   md:group-hover:bg-ink/45 md:group-hover:opacity-100 md:group-hover:pointer-events-auto
+                                   md:group-focus-within:bg-ink/45 md:group-focus-within:opacity-100 md:group-focus-within:pointer-events-auto"
+                      >
+                        {cert.credentialUrl && (
+                          <a
+                            href={cert.credentialUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Verify with issuer"
+                            aria-label={`Verify ${cert.name} with ${cert.issuer}`}
+                            className="neo bg-accent text-ink p-2 transition-transform hover:-translate-y-0.5"
+                          >
+                            <BadgeCheck size={20} />
+                          </a>
+                        )}
+                        {cert.imageUrl && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setCertImage({
+                                url: cert.imageUrl!,
+                                alt: `${cert.name} certificate issued by ${cert.issuer}`,
+                                caption: `${cert.name} — ${cert.issuer}`,
+                              })
+                            }
+                            title="View certificate"
+                            aria-label={`View the ${cert.name} certificate`}
+                            className="neo bg-paper dark:bg-night p-2 transition-transform hover:-translate-y-0.5"
+                          >
+                            <Eye size={20} />
+                          </button>
+                        )}
+                        {!cert.imageUrl && cert.fileUrl && (
+                          <a
+                            href={cert.fileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="View certificate (PDF)"
+                            aria-label={`View the ${cert.name} certificate as PDF`}
+                            className="neo bg-paper dark:bg-night p-2 transition-transform hover:-translate-y-0.5"
+                          >
+                            <FileText size={20} />
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </GlassCard>
               </ScrollReveal>
-            ))}
+              );
+            })}
           </div>
         </div>
 
       </div>
+
+      {certImage && (
+        <Lightbox
+          images={[certImage]}
+          alt={certImage.alt}
+          onClose={() => setCertImage(null)}
+        />
+      )}
     </section>
   );
 };

@@ -111,9 +111,9 @@ export const PROJECTS_DATA: Project[] = [
     ],
     thumbnail: "/assets/images/sisuka-ai/1.png",
     images: [
-      "/assets/images/sisuka-ai/2.png",
-      "https://placehold.co/1200x800/1A1A18/FF9EC4?text=Admin+Dashboard",
-      "https://placehold.co/1200x800/2A2722/FF9EC4?text=Analytics+Overview",
+      { url: "/assets/images/sisuka-ai/2.png" },
+      { url: "https://placehold.co/1200x800/1A1A18/FF9EC4?text=Admin+Dashboard" },
+      { url: "https://placehold.co/1200x800/2A2722/FF9EC4?text=Analytics+Overview" },
     ],
     description: [
       "Interactive public chatbot powered by OpenAI and Dify to answer company-related FAQs.",
@@ -132,9 +132,9 @@ export const PROJECTS_DATA: Project[] = [
     techStack: ["Angular", "Bootstrap", "Express.js", "Prisma"],
     thumbnail: "/assets/images/ai-management/1.png",
     images: [
-      "/assets/images/ai-management/2.png",
-      "/assets/images/ai-management/3.png",
-      "/assets/images/ai-management/4.png",
+      { url: "/assets/images/ai-management/2.png" },
+      { url: "/assets/images/ai-management/3.png" },
+      { url: "/assets/images/ai-management/4.png" },
     ],
     description: [
       "Internal application for managing AI knowledge bases and documents.",
@@ -152,9 +152,9 @@ export const PROJECTS_DATA: Project[] = [
     techStack: ["Angular", "Bootstrap", "Express.js", "Prisma", "RFID"],
     thumbnail: "/assets/images/canteen-app/1.png",
     images: [
-      "/assets/images/canteen-app/2.png",
-      "/assets/images/canteen-app/3.png",
-      "/assets/images/canteen-app/4.png",
+      { url: "/assets/images/canteen-app/2.png" },
+      { url: "/assets/images/canteen-app/3.png" },
+      { url: "/assets/images/canteen-app/4.png" },
     ],
     description: [
       "Integrated application for managing employee meal planning.",
@@ -173,11 +173,11 @@ export const PROJECTS_DATA: Project[] = [
     techStack: ["Angular", "Bootstrap", "Express.js", "Prisma"],
     thumbnail: "/assets/images/dpia-app/1.png",
     images: [
-      "/assets/images/dpia-app/2.png",
-      "/assets/images/dpia-app/3.png",
-      "/assets/images/dpia-app/4.png",
-      "/assets/images/dpia-app/5.png",
-      "/assets/images/dpia-app/6.png",
+      { url: "/assets/images/dpia-app/2.png" },
+      { url: "/assets/images/dpia-app/3.png" },
+      { url: "/assets/images/dpia-app/4.png" },
+      { url: "/assets/images/dpia-app/5.png" },
+      { url: "/assets/images/dpia-app/6.png" },
     ],
     // TODO: replace with this project's real Google Drive gallery folder link
     galleryUrl: "https://drive.google.com/drive/folders/REPLACE_WITH_FOLDER_ID",
@@ -205,9 +205,9 @@ export const PROJECTS_DATA: Project[] = [
     thumbnail:
       "https://placehold.co/800x500/2A2722/FF5E3A?text=Streamy+Movie+App",
     images: [
-      "https://placehold.co/1200x800/2A2722/FF5E3A?text=Movie+Catalog",
-      "https://placehold.co/1200x800/1A1A18/FF5E3A?text=Payment+Gateway+Integration",
-      "https://placehold.co/1200x800/2A2722/FF5E3A?text=User+Profile",
+      { url: "https://placehold.co/1200x800/2A2722/FF5E3A?text=Movie+Catalog" },
+      { url: "https://placehold.co/1200x800/1A1A18/FF5E3A?text=Payment+Gateway+Integration" },
+      { url: "https://placehold.co/1200x800/2A2722/FF5E3A?text=User+Profile" },
     ],
     description: [
       "Integrated project with Midtrans Snap payment gateway for secure transactions.",
@@ -235,9 +235,9 @@ export const PROJECTS_DATA: Project[] = [
     thumbnail:
       "https://placehold.co/800x500/2A2722/4DA3FF?text=TalasGo+E-Commerce",
     images: [
-      "https://placehold.co/1200x800/2A2722/4DA3FF?text=Product+Listing",
-      "https://placehold.co/1200x800/1A1A18/4DA3FF?text=Cart+Management",
-      "https://placehold.co/1200x800/2A2722/4DA3FF?text=Admin+Panel",
+      { url: "https://placehold.co/1200x800/2A2722/4DA3FF?text=Product+Listing" },
+      { url: "https://placehold.co/1200x800/1A1A18/4DA3FF?text=Cart+Management" },
+      { url: "https://placehold.co/1200x800/2A2722/4DA3FF?text=Admin+Panel" },
     ],
     description: [
       "Designed software systems including Use Case, ERD, and Class Diagrams.",
@@ -258,9 +258,9 @@ export const PROJECTS_DATA: Project[] = [
     thumbnail:
       "https://placehold.co/800x500/2A2722/9BE564?text=Kosanku+Booking",
     images: [
-      "https://placehold.co/1200x800/2A2722/9BE564?text=Room+Listings",
-      "https://placehold.co/1200x800/1A1A18/9BE564?text=Booking+Form",
-      "https://placehold.co/1200x800/2A2722/9BE564?text=WhatsApp+Redirection",
+      { url: "https://placehold.co/1200x800/2A2722/9BE564?text=Room+Listings" },
+      { url: "https://placehold.co/1200x800/1A1A18/9BE564?text=Booking+Form" },
+      { url: "https://placehold.co/1200x800/2A2722/9BE564?text=WhatsApp+Redirection" },
     ],
     description: [
       "Collaborated in the development of responsive user interfaces.",

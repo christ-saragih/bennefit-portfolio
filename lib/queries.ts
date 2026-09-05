@@ -1,6 +1,6 @@
 import { supabase, storageUrl } from "./supabase";
 import { formatRange, formatGpa } from "./format";
-import type { ProjectCategory, TechCategory, TablesInsert } from "../types/database";
+import type { ProjectCategory, TechCategory, TablesInsert, Json } from "../types/database";
 import type {
   Profile,
   SocialLink,
@@ -9,6 +9,8 @@ import type {
   Certification,
   SkillCategory,
   Project,
+  ProjectMetric,
+  ProjectChallenge,
 } from "../types";
 
 // ---------- label maps ----------
@@ -150,7 +152,9 @@ export async function getEducation(): Promise<Education[]> {
 export async function getCertifications(): Promise<Certification[]> {
   const { data, error } = await supabase
     .from("certifications")
-    .select("name, issuer, issue_date, expiry_date, sort_order")
+    .select(
+      "name, issuer, issue_date, expiry_date, credential_id, credential_url, file_path, image_path, sort_order"
+    )
     .eq("is_published", true)
     .order("sort_order");
   if (error) throw error;
@@ -158,6 +162,10 @@ export async function getCertifications(): Promise<Certification[]> {
     name: c.name,
     issuer: c.issuer,
     period: formatRange(c.issue_date, c.expiry_date, false),
+    credentialId: c.credential_id ?? undefined,
+    credentialUrl: c.credential_url ?? undefined,
+    imageUrl: storageUrl("documents", c.image_path) ?? undefined,
+    fileUrl: storageUrl("documents", c.file_path) ?? undefined,
   }));
 }
 
@@ -183,28 +191,74 @@ export async function getSkills(): Promise<SkillCategory[]> {
 }
 
 // ---------- PROJECTS ----------
-const PROJECT_SELECT = `slug, title, overview, category, role_title, location, start_date, end_date,
+const PROJECT_SELECT = `slug, title, summary, overview, category, role_title, location, start_date, end_date,
+  situation, task, contributions, results, metrics, challenges, lessons, team_size, is_confidential,
   thumbnail_path, gallery_url, demo_url, repo_url, is_featured, sort_order,
-  images:project_images ( storage_path, sort_order ),
+  images:project_images ( storage_path, alt_text, caption, sort_order ),
   techs:project_technologies ( sort_order, technology:technologies ( name ) )`;
 
 type RawProject = {
   slug: string;
   title: string;
+  summary: string | null;
   overview: string[];
   category: ProjectCategory;
   role_title: string | null;
   location: string | null;
   start_date: string | null;
   end_date: string | null;
+  situation: string | null;
+  task: string | null;
+  contributions: string[] | null;
+  results: string[] | null;
+  metrics: Json;
+  challenges: Json;
+  lessons: string[] | null;
+  team_size: number | null;
+  is_confidential: boolean;
   thumbnail_path: string | null;
   gallery_url: string | null;
   demo_url: string | null;
   repo_url: string | null;
   is_featured: boolean;
-  images: { storage_path: string; sort_order: number }[];
+  images: {
+    storage_path: string;
+    alt_text: string | null;
+    caption: string | null;
+    sort_order: number;
+  }[];
   techs: { sort_order: number; technology: { name: string } | null }[];
 };
+
+/** jsonb arrives untyped — read the fields we know and drop malformed entries. */
+function readString(v: unknown): string | undefined {
+  if (typeof v === "string" && v.trim()) return v;
+  if (typeof v === "number") return String(v);
+  return undefined;
+}
+
+function toMetrics(raw: Json): ProjectMetric[] {
+  if (!Array.isArray(raw)) return [];
+  return raw.flatMap((entry) => {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) return [];
+    const label = readString((entry as Record<string, unknown>).label);
+    const value = readString((entry as Record<string, unknown>).value);
+    return label && value ? [{ label, value }] : [];
+  });
+}
+
+function toChallenges(raw: Json): ProjectChallenge[] {
+  if (!Array.isArray(raw)) return [];
+  return raw.flatMap((entry) => {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) return [];
+    const e = entry as Record<string, unknown>;
+    const title = readString(e.title);
+    const problem = readString(e.problem);
+    const approach = readString(e.approach);
+    if (!title || !problem || !approach) return [];
+    return [{ title, problem, approach, outcome: readString(e.outcome) }];
+  });
+}
 
 function mapProject(p: RawProject): Project {
   return {
@@ -213,6 +267,7 @@ function mapProject(p: RawProject): Project {
     location: p.location ?? "",
     period: formatRange(p.start_date, p.end_date, false),
     role: p.role_title ?? "",
+    summary: p.summary ?? undefined,
     description: p.overview ?? [],
     techStack: (p.techs ?? [])
       .slice()
@@ -224,12 +279,25 @@ function mapProject(p: RawProject): Project {
     images: (p.images ?? [])
       .slice()
       .sort((a, b) => a.sort_order - b.sort_order)
-      .map((i) => storageUrl("projects", i.storage_path))
-      .filter((u): u is string => !!u),
+      .flatMap((i) => {
+        const url = storageUrl("projects", i.storage_path);
+        return url
+          ? [{ url, alt: i.alt_text ?? undefined, caption: i.caption ?? undefined }]
+          : [];
+      }),
     galleryUrl: p.gallery_url ?? undefined,
     demoUrl: p.demo_url ?? undefined,
     repoUrl: p.repo_url ?? undefined,
     isFeatured: p.is_featured,
+    situation: p.situation ?? undefined,
+    task: p.task ?? undefined,
+    contributions: p.contributions ?? [],
+    results: p.results ?? [],
+    metrics: toMetrics(p.metrics),
+    challenges: toChallenges(p.challenges),
+    lessons: p.lessons ?? [],
+    teamSize: p.team_size ?? undefined,
+    isConfidential: p.is_confidential,
   };
 }
 
